@@ -61,7 +61,7 @@ def buscar_tarefa(tarefa):
     for item in lista:
         if tarefa in item['Tarefa']:
             status = "✓" if item.get('Concluido', False) else ""
-            print(f"Tarefa encontrada: {item['Tarefa']} [{status}]")
+            print(f"\nTarefa encontrada: {item['Tarefa']} [{status}]")
             encontrada = True
 
     if not encontrada:
@@ -130,7 +130,7 @@ def deletar_tarefa(indice):
         return
 
     removido = lista[indice]
-    confirmar = input(f"Tem certeza que deseja deletar a tarefa {removido['Tarefa']}? (s/n)").lower().strip()
+    confirmar = input(f"Tem certeza que deseja deletar a tarefa {removido['Tarefa']}? (s/n):").lower().strip()
 
     if confirmar not in ('s', 'n'):
         print("Opção inválida.")
@@ -170,7 +170,7 @@ while True:
             ver_lista(lista)
 
         elif escolha == 3:
-            buscar = input("Digite a tarefa que deseja encontrar:")
+            buscar = input("\nDigite a tarefa que deseja encontrar:")
             buscar_tarefa(buscar)
 
         elif escolha == 4:

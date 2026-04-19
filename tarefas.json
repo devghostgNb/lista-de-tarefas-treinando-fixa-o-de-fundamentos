@@ -1,10 +1,6 @@
 [
     {
-        "Tarefa": "jogar bola",
-        "Concluido": true
-    },
-    {
-        "Tarefa": "varrer a casa",
+        "Tarefa": "estudar",
         "Concluido": false
     }
 ]
