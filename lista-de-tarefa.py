@@ -39,8 +39,10 @@ def ver_lista(lista):
         print("Lista vazia")
         return
 
+    print("\nLista de Tarefas")
+
     for t, tarefas in enumerate(lista, start=1):
-        status = "✔️" if tarefas.get('Concluido', False) else ''
+        status = "✓" if tarefas.get('Concluido', False) else ''
         print(f"{t}. {tarefas['Tarefa']} [{status}]")
 
 def buscar_tarefa(tarefa):
@@ -58,7 +60,7 @@ def buscar_tarefa(tarefa):
 
     for item in lista:
         if tarefa in item['Tarefa']:
-            status = "✔️" if item.get('Concluido', False) else ""
+            status = "✓" if item.get('Concluido', False) else ""
             print(f"Tarefa encontrada: {item['Tarefa']} [{status}]")
             encontrada = True
 
@@ -150,7 +152,7 @@ while True:
     print("8. Sair")
 
     try:
-        escolha = int(input("Digite o número que deseja acessar:"))
+        escolha = int(input("\nDigite o número que deseja acessar:"))
 
         if escolha == 1:
             tarefa = input("Digite o nome da tarefa que deseja adicionar:")
@@ -164,20 +166,24 @@ while True:
             buscar_tarefa(buscar)
 
         elif escolha == 4:
-            indice = int(input("Digite o índice da tarefa que deseja concluir:"))
+            ver_lista(lista)
+            indice = int(input("\nDigite o índice da tarefa que deseja concluir:"))
             concluir_tarefa(lista, indice)
 
         elif escolha == 5:
-            indice = int(input("Digite o índice da tarefa que deseja desmarcar como concluída:"))
+            ver_lista(lista)
+            indice = int(input("\nDigite o índice da tarefa que deseja desmarcar como concluída:"))
             desmarcar_concluir(lista, indice)
 
         elif escolha == 6:
-            indice = int(input("Digite o índice da tarefa que deseja editar:"))
+            ver_lista(lista)
+            indice = int(input("\nDigite o índice da tarefa que deseja editar:"))
             novo_nome = input("Digite o novo nome da tarefa:")
             editar_tarefa(indice, novo_nome)
 
         elif escolha == 7:
-            indice = int(input("Digite o índice da tarefa que deseja deletar:"))
+            ver_lista(lista)
+            indice = int(input("\nDigite o índice da tarefa que deseja deletar:"))
             deletar_tarefa(indice)
 
         elif escolha == 8:
