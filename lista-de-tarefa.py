@@ -76,6 +76,8 @@ def concluir_tarefa(lista, indice):
 
     lista [indice]['Concluido'] = True
     print(f"Tarefa '{lista[indice]['Tarefa']}' foi concluída.")
+    print("\nLista atualizada:")
+    ver_lista(lista)
     salvar_contato()
 
 def desmarcar_concluir(lista, indice):
@@ -87,6 +89,8 @@ def desmarcar_concluir(lista, indice):
 
     lista [indice]['Concluido'] = False
     print(f"Tarefa '{lista[indice]['Tarefa']}' não foi concluída.")
+    print("\nLista atualizada:")
+    ver_lista(lista)
     salvar_contato()
 
 def editar_tarefa(indice, novo_nome):
@@ -111,6 +115,8 @@ def editar_tarefa(indice, novo_nome):
     lista[indice]['Tarefa'] = novo_nome
     salvar_contato()
     print(f"Tarefa '{antiga}' atualizada para: '{novo_nome}'")
+    print("\nLista atualizada:")
+    ver_lista(lista)
 
 def deletar_tarefa(indice):
     if not lista:
@@ -133,6 +139,8 @@ def deletar_tarefa(indice):
     if confirmar == 's':
         removido = lista.pop(indice)
         print(f"Tarefa '{removido['Tarefa']}' deletada com sucesso.")
+        print("\nLista atualizada:")
+        ver_lista(lista)
 
     else:
         print("Exclusão cancelada.")
