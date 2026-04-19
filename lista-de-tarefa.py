@@ -4,7 +4,7 @@ lista = []
 
 def salvar_contato():
     with open('tarefas.json', 'w', encoding= 'utf-8') as arquivo:
-        json.dump(lista, arquivo, indent= 4)
+        json.dump(lista, arquivo, indent= 4, ensure_ascii=False)
 
 def carregar_contato():
     global lista
@@ -40,7 +40,7 @@ def ver_lista(lista):
         return
 
     for t, tarefas in enumerate(lista, start=1):
-        status = "★" if tarefas ['Concluido'] else ''
+        status = "✔️" if tarefas.get('Concluido', False) else ''
         print(f"{t}. {tarefas['Tarefa']} [{status}]")
 
 def buscar_tarefa(tarefa):
@@ -54,12 +54,15 @@ def buscar_tarefa(tarefa):
         print("Tarefa inválida.")
         return
 
+    encontrada = False
+
     for item in lista:
         if tarefa in item['Tarefa']:
-            status = "★" if item.get('Concluido', False) else ""
+            status = "✔️" if item.get('Concluido', False) else ""
             print(f"Tarefa encontrada: {item['Tarefa']} [{status}]")
-            return
-    else:
+            encontrada = True
+
+    if not encontrada:
         print("Tarefa não encontrada.")
 
 def concluir_tarefa(lista, indice):
@@ -69,8 +72,8 @@ def concluir_tarefa(lista, indice):
         print("Índice inválido.")
         return
 
-    lista [indice] ['Concluido'] = True
-    print(f"Tarefa {lista[indice]['Tarefa']} foi concluída.")
+    lista [indice]['Concluido'] = True
+    print(f"Tarefa '{lista[indice]['Tarefa']}' foi concluída.")
     salvar_contato()
 
 def desmarcar_concluir(lista, indice):
@@ -80,8 +83,8 @@ def desmarcar_concluir(lista, indice):
         print("Índice inválido.")
         return
 
-    lista [indice] ['Concluido'] = False
-    print(f"Tarefa {lista[indice]['Tarefa']} não concluída.")
+    lista [indice]['Concluido'] = False
+    print(f"Tarefa '{lista[indice]['Tarefa']}' não foi concluída.")
     salvar_contato()
 
 def editar_tarefa(indice, novo_nome):
@@ -105,7 +108,7 @@ def editar_tarefa(indice, novo_nome):
     antiga = lista[indice]['Tarefa']
     lista[indice]['Tarefa'] = novo_nome
     salvar_contato()
-    print(f"Tarefa {antiga} atualizada para: {novo_nome}")
+    print(f"Tarefa '{antiga}' atualizada para: '{novo_nome}'")
 
 def deletar_tarefa(indice):
     if not lista:
@@ -161,20 +164,20 @@ while True:
             buscar_tarefa(buscar)
 
         elif escolha == 4:
-            indice = int(input("Digite o indice do contato que deseja favoritar:"))
+            indice = int(input("Digite o índice da tarefa que deseja concluir:"))
             concluir_tarefa(lista, indice)
 
         elif escolha == 5:
-            indice = int(input("Digite o indice do contato que deseja desfavoritar:"))
+            indice = int(input("Digite o índice da tarefa que deseja desmarcar como concluída:"))
             desmarcar_concluir(lista, indice)
 
         elif escolha == 6:
-            indice = int(input("Digite o indice da tarefa que deseja editar:"))
+            indice = int(input("Digite o índice da tarefa que deseja editar:"))
             novo_nome = input("Digite o novo nome da tarefa:")
             editar_tarefa(indice, novo_nome)
 
         elif escolha == 7:
-            indice = int(input("Digite o indice da tarefa que deseja deletar:"))
+            indice = int(input("Digite o índice da tarefa que deseja deletar:"))
             deletar_tarefa(indice)
 
         elif escolha == 8:
